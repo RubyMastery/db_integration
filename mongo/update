@@ -1,0 +1,9 @@
+require 'mongo'
+
+client = Mongo::Client.new(['localhost:27017'], :database => 'ecommerce')
+
+result = client[:product].update_one({name: 'Airfraier'}, 
+    {"$set" => {category: {name: 'Eletrodomestico'}}})
+
+msg = result.modified_count > 0 ? "Dados atualizados com sucesso." : "Nenhum documento foi atualizado"
+puts msg 
